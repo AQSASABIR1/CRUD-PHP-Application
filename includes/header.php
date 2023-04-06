@@ -1,3 +1,20 @@
+<?php
+include_once "config.php";
+// retrieve the website title for the website with id = 1
+$id = 1;
+$sql = "SELECT setting_value FROM site_settings WHERE id = $id";
+$result = $con->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $title = $row["setting_value"];
+        echo "<title>$title</title>";
+    }
+} else {
+    echo "0 results";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +22,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+       <?php echo $title; ?>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -48,6 +65,22 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+                <p class="masthead-subheading font-weight-light mb-0">
+                <?php
+                                include_once "config.php";
+                                // retrieve the location for the footer with id = 9
+                                      $site_description="";
+                                        $sql = "SELECT * FROM site_settings WHERE setting_key = 'site_description'";
+                                        $result = $con->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                // output data of each row
+                                              while($row = $result->fetch_assoc()) {
+                                                 $site_description = $row["setting_value"];
+                                                        }
+                                                    }
+                                                            echo $site_description;
+                            ?>
+                </p>
             </div>
         </header>
