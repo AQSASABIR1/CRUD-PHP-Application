@@ -6,9 +6,21 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
-                            2215 John Daniel Drive
-                            <br />
-                            Clark, MO 65243
+                        <?php
+                                include_once "config.php";
+                                      $b_address="";
+                                        $sql = "SELECT * FROM site_settings WHERE setting_key = 'b_address'";
+                                        $result = $con->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                // output data of each row
+                                              while($row = $result->fetch_assoc()) {
+                                                 $b_address = $row["setting_value"];
+                                                        }
+                                                    }
+                                                            $con->close();
+                                                            echo $b_address;
+                            ?>
                         </p>
                     </div>
                     <!-- Footer Social Icons-->
