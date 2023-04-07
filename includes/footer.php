@@ -7,37 +7,58 @@
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
                         <?php
-                                include_once "config.php";
                                       $b_address="";
                                         $sql = "SELECT * FROM site_settings WHERE setting_key = 'b_address'";
                                         $result = $con->query($sql);
-
                                             if ($result->num_rows > 0) {
                                                 // output data of each row
                                               while($row = $result->fetch_assoc()) {
                                                  $b_address = $row["setting_value"];
                                                         }
-                                                    }
-                                                            $con->close();
+                                                    }   
                                                             echo $b_address;
                             ?>
                         </p>
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                    <h4 class="text-uppercase mb-4">Around the Web</h4>
+                    <?php
+                            $b_address="";
+                            $sql = "SELECT * FROM site_settings WHERE id in(5,6,7,8)";
+                             $result = $con->query($sql);
+                             $social_icons=array();
+                            if ($result->num_rows > 0) {
+                             // output data of each row
+                             while($row = $result->fetch_assoc()) {
+                                  $social_icons[] = $row["setting_value"];
+                                      }
+                                     }
+                                  
+                            ?>
+                        
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://<php echo $social_icons[0]; ?>"><i class="fab fa-fw fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://<php echo $social_icons[1]; ?>"><i class="fab fa-fw fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://<php echo $social_icons[2]; ?>"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://<php echo $social_icons[3]; ?>"><i class="fab fa-fw fa-dribbble"></i></a>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">About Freelancer</h4>
-                        <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
+                       
+                            <?php
+                            $sql = "SELECT * FROM site_settings WHERE setting_key='about_freelancer'";
+                             $result = $con->query($sql);
+                            
+                            if ($result->num_rows > 0) {
+                             // output data of each row
+                             while($row = $result->fetch_assoc()) {
+                                  $about_freelancer = $row["setting_value"];
+                                      }
+                                     }
+                            ?>
+                            <p class="lead mb-0"><?php echo $about_freelancer; ?>, MIT licensed Bootstrap theme created by
                             <a href="http://startbootstrap.com">Start Bootstrap</a>
-                            .
                         </p>
                     </div>
                 </div>
@@ -45,7 +66,19 @@
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Your Website 2023</small></div>
+        <?php
+                            $sql = "SELECT * FROM site_settings WHERE setting_key='copyright_text'";
+                             $result = $con->query($sql);
+                             $copyright_text="";
+                            if ($result->num_rows > 0) {
+                             // output data of each row
+                             while($row = $result->fetch_assoc()) {
+                                  $copyright_text = $row["setting_value"];
+                                      }
+                                     }
+                                    $con->close();
+                            ?>
+            <div class="container"><small>Copyright &copy; <?php echo $copyright_text; ?></small></div>
         </div>
         <!-- Portfolio Modals-->
         <!-- Portfolio Modal 1-->
