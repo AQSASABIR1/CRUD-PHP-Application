@@ -1,14 +1,6 @@
 <?php
 include_once "config.php";
-$site_title="";
-$sql = "SELECT * FROM site_settings WHERE setting_key = 'site_title'";
-$result = $con->query($sql);
-    if ($result->num_rows > 0) {
-        // output data of each row
-      while($row = $result->fetch_assoc()) {
-         $title= $row["setting_value"];
-                }
-            }
+include "includes/function.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,19 +9,9 @@ $result = $con->query($sql);
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-       <title><?php echo $title; ?></title>
+       <title><?php echo get_site_setting ($con,  'site_title' ); ?></title>
         <!-- Favicon-->
-        <?php
-                   $site_favicon="./assets/favicon.ico";
-               $sql = "SELECT * FROM site_settings WHERE setting_key = 'site_favicon'";
-                 $result = $con->query($sql);
-                       if ($result->num_rows > 0) {
-                         while($row = $result->fetch_assoc()) {
-                             $site_favicon=$row["setting_value"];
-                }
-            }
-?>
-        <link rel="icon" type="image/x-icon" href="<?php echo $site_favicon; ?>" />
+        <link rel="icon" type="image/x-icon" href="<?php echo get_site_setting ($con,  'site_favicon' ); ?>" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -42,18 +24,7 @@ $result = $con->query($sql);
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <?php
-                   $site_logo="";
-               $sql = "SELECT * FROM site_settings WHERE setting_key = 'site_logo'";
-                 $result = $con->query($sql);
-                       if ($result->num_rows > 0) {
-                              // output data of each row
-                         while($row = $result->fetch_assoc()) {
-                          $site_logo= "<img src='".$row['setting_value']."' height='100px' width='100px' />";
-                }
-            }
-?>
-                <a class="navbar-brand" href="#page-top"><?php echo $site_logo; ?></a>
+                <a class="navbar-brand" href="#page-top"><?php echo "<img src='".get_site_setting ($con,  'site_logo' )."' height='100px' width='100px'"; ?></a>
                 <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -82,18 +53,7 @@ $result = $con->query($sql);
                 </div>
                 <!-- Masthead Subheading-->
                 <p class="masthead-subheading font-weight-light mb-0">
-                <?php
-                                      $site_description="";
-                                        $sql = "SELECT * FROM site_settings WHERE setting_key = 'site_description'";
-                                        $result = $con->query($sql);
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                              while($row = $result->fetch_assoc()) {
-                                                 $site_description = $row["setting_value"];
-                                                        }
-                                                    }
-                                                            echo $site_description;
-                            ?>
+                <?php echo get_site_setting ($con,  'site_description' ); ?>
                 </p>
             </div>
         </header>
