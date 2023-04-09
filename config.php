@@ -3,11 +3,11 @@ $username="root";
 $password="";
 $host="localhost";
 $database="db";
-$con=mysqli_connect("$host","$username","$password","$database");
+$con=mysqli_connect("$host","$username","$password");
 
 if($con==true)
 {
-    echo "Connected Successfully";
+    echo "Success";
 }
 else
 {
